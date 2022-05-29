@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FileStorageClient.UI.Helpers;
 
 namespace FileStorageClient.UI.Commands.MainWindowCommands
 {
-    internal class LoginCommand : CommandBase
+    public class LoginCommand : CommandBase
     {
         private MainWindowViewModel _viewModel;
         public LoginCommand(MainWindowViewModel viewModel)
@@ -15,9 +16,17 @@ namespace FileStorageClient.UI.Commands.MainWindowCommands
             _viewModel = viewModel;
         }
 
-        public override void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
+            var result = await _viewModel._userService.LoginUser(_viewModel.NameTextBox, StringHelper.SecureStringToString(_viewModel.SecurePassword));
+            if (result != null)
+            {
 
+            }
+            else
+            {
+                _viewModel.ErrorLabel = "Invalid username or Password";
+            }
         }
     }
 }

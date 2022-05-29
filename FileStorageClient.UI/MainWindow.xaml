@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FileStorageClient" 
         xmlns:data="clr-namespace:FileStorageClient.UI.ViewModels"
         mc:Ignorable="d"
-        Title="FileStorage" Height="250" Width="400">
+        Title="FileStorage" Height="450" Width="600">
     <Window.DataContext>
         <data:MainWindowViewModel/>
     </Window.DataContext>
@@ -24,11 +24,12 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="20">
+            <Label Content="{Binding ErrorLabel}" HorizontalAlignment="Center" Margin="0" Foreground="Red" VerticalAlignment="Center"/>
             <Label Content="Login" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
             <TextBox Text="{Binding NameTextBox}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" TextWrapping="Wrap" Width="120"/>
             <Label Content="Password" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
-            <PasswordBox PasswordChanged="" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Width="120"/>
-            <Button Command="{Binding DataContext.Login}" Content="Enter" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+            <PasswordBox PasswordChanged="PasswordChangedHandler" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Width="120"/>
+            <Button Command="{Binding Login}" Content="Enter" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
         </StackPanel>
         
     </Grid>

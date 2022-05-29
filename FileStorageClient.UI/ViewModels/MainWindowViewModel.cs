@@ -1,21 +1,23 @@
-﻿using FileStorageClient.UI.Commands.MainWindowCommands;
+﻿using FileStorage.Client.BLL.Service;
+using FileStorageClient.UI.Commands.MainWindowCommands;
 using MvvmHelpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FileStorageClient.UI.ViewModels
 {
-    internal class MainWindowViewModel : BaseViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
+        public readonly IUserService _userService;
         public ICommand Login { get; set; }
 
         private string _nameTextBox;
-        private string _passwordTextBox;
         public string NameTextBox
         {
             get { return _nameTextBox; }
@@ -26,19 +28,23 @@ namespace FileStorageClient.UI.ViewModels
             }
         }
 
-        public string PasswordTextBox
+        private string _errorLabel;
+        public string ErrorLabel
         {
-            get { return _passwordTextBox; }
-            set 
+            get { return _errorLabel; }
+            set
             {
-                _passwordTextBox = value;
-                OnPropertyChanged(nameof(PasswordTextBox));
+                _errorLabel = value;
+                OnPropertyChanged(nameof(ErrorLabel));
             }
         }
+
+        public SecureString SecurePassword { get; set; }
 
         public MainWindowViewModel()
         {
             Login = new LoginCommand(this);
+            _userService = new UserService();
         }
 
     }

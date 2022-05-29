@@ -29,5 +29,13 @@ namespace FileStorageClient
             DataContext = _viewModel;
             InitializeComponent();
         }
+        void PasswordChangedHandler(Object sender, RoutedEventArgs args)
+        {
+            if (this.DataContext != null)
+            {
+                ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword;
+            }
+        }
+
     }
 }
