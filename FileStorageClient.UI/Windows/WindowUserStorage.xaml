@@ -2,15 +2,27 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FileStorageClient.UI.Windows"
+        xmlns:local="clr-namespace:FileStorageClient.UI.Windows" 
+        xmlns:data="clr-namespace:FileStorageClient.UI.ViewModels"
         mc:Ignorable="d"
-        Title="FileStorage" Height="450" Width="800">
+        Title="FileStorage" Height="650" Width="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadFiles}" />
+            <i:InvokeCommandAction Command="{Binding GetUserName}" />
+
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <Style TargetType="Label">
             <Setter Property="FontFamily" Value="Verdana" />
             <Setter Property="Margin" Value="5" />
             <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="15"/>
+            
         </Style>
         <Style TargetType="GroupBox">
             <Setter Property="Foreground" Value="White" />
@@ -27,10 +39,43 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="150*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="1" Content="Welcome Username" VerticalAlignment="Center"/>
+        <Label Grid.Column="1" Content="{Binding UserNameLabel}" VerticalAlignment="Center"/>
+        <DataGrid SelectedItem="{Binding SelectedStoredFile}" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" x:Name ="DataGridListFiles" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Files}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="3*" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="3*" Header="Size" Binding="{Binding Size}"/>
+                <DataGridTemplateColumn Width="1*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.DownloadFile, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >Download</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="1*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.DeleteFile, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >Delete</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" >
+                <Label Content="Enter path to save" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding UploadPath}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0" TextWrapping="Wrap" Width="320"/>
+                <Button Command="{Binding UploadFile}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10">Upload</Button>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" >
+                <Label Content="Enter path to download" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding DownloadPath}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0" TextWrapping="Wrap" Width="520"/>
+            </StackPanel>
+        </StackPanel>
+        
 
     </Grid>
 </Window>

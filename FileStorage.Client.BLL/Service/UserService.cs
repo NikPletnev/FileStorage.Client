@@ -22,10 +22,7 @@ namespace FileStorage.Client.BLL.Service
             var userModel = new UserModel() { Name = name, Password = password};
             RestRequest request = new RestRequest(Urls.Login, Method.Post);
             request.AddBody(userModel);
-
             var response = await GetResponseAsync<string>(request);
-
-
             var token = response.Data;
             if (token != null)
             { 
@@ -35,6 +32,16 @@ namespace FileStorage.Client.BLL.Service
             {
                 return null;
             }
+        }
+
+        public async Task<UserModel> GetUser(int userId, string token)
+        {
+            var userIdParam = "id";
+            RestRequest request = new RestRequest(Urls.GetUser + $"{userId}", Method.Get);
+            request.AddParameter(userIdParam, userId);
+            request.AddHeader("Authorization", "Bearer " + token);
+            var response = await GetResponseAsync<UserModel>(request);
+            return response.Data;
         }
     }
 }

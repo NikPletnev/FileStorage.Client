@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileStorageClient.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace FileStorageClient.UI.Windows
     /// </summary>
     public partial class WindowUserStorage : Window
     {
-        public WindowUserStorage()
+        private WindowUserStorageViewModel _viewModel;
+        public WindowUserStorage(string token)
         {
             InitializeComponent();
+            _viewModel = new WindowUserStorageViewModel(token);
+            DataContext = _viewModel;
         }
     }
 }

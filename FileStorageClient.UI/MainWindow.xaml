@@ -1,4 +1,5 @@
 ﻿<Window x:Class="FileStorageClient.MainWindow"
+        x:Name="LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,9 +8,7 @@
         xmlns:data="clr-namespace:FileStorageClient.UI.ViewModels"
         mc:Ignorable="d"
         Title="FileStorage" Height="450" Width="600">
-    <Window.DataContext>
-        <data:MainWindowViewModel/>
-    </Window.DataContext>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>

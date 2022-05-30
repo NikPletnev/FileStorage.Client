@@ -25,9 +25,11 @@ namespace FileStorageClient
 
         public MainWindow()
         {
-            _viewModel = new MainWindowViewModel();
-            DataContext = _viewModel;
             InitializeComponent();
+            _viewModel = new MainWindowViewModel();  
+            if (_viewModel.CloseAction == null)
+                _viewModel.CloseAction = new Action(this.Close);
+            DataContext = _viewModel;
         }
         void PasswordChangedHandler(Object sender, RoutedEventArgs args)
         {

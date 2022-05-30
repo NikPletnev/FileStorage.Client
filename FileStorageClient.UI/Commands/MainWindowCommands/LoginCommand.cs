@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FileStorageClient.UI.Helpers;
+using FileStorageClient.UI.Windows;
 
 namespace FileStorageClient.UI.Commands.MainWindowCommands
 {
@@ -21,7 +22,9 @@ namespace FileStorageClient.UI.Commands.MainWindowCommands
             var result = await _viewModel._userService.LoginUser(_viewModel.NameTextBox, StringHelper.SecureStringToString(_viewModel.SecurePassword));
             if (result != null)
             {
-
+                WindowUserStorage userStorageWindow = new WindowUserStorage(result);
+                userStorageWindow.Show();
+                _viewModel.CloseAction();
             }
             else
             {

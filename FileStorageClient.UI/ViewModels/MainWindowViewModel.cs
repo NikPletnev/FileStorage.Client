@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FileStorageClient.UI.ViewModels
@@ -40,6 +41,7 @@ namespace FileStorageClient.UI.ViewModels
         }
 
         public SecureString SecurePassword { get; set; }
+        public Action CloseAction { get; set; }
 
         public MainWindowViewModel()
         {
