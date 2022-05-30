@@ -1,10 +1,5 @@
-﻿using FileStorageClient.UI.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FileStorageClient.UI.Helpers;
+﻿using FileStorageClient.UI.Helpers;
+using FileStorageClient.UI.ViewModels;
 using FileStorageClient.UI.Windows;
 
 namespace FileStorageClient.UI.Commands.MainWindowCommands

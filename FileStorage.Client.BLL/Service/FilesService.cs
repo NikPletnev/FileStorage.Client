@@ -1,11 +1,6 @@
 ﻿using FileStorage.Client.BLL.Helpers;
 using FileStorage.Client.BLL.Models;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileStorage.Client.BLL.Service
 {

@@ -1,17 +1,13 @@
 ﻿using AutoMapper;
 using FileStorage.Client.BLL.Config;
 using FileStorage.Client.BLL.Service;
-using FileStorageClient.UI.Commands.MainWindowCommands;
 using FileStorageClient.UI.Commands.UserStorageCommands;
 using FileStorageClient.UI.Models;
 using MvvmHelpers;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FileStorageClient.UI.ViewModels
@@ -25,7 +21,7 @@ namespace FileStorageClient.UI.ViewModels
 
         public int UserId { get; set; }
         private const string USER_DATA_CLAIM = "http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata";
-     
+
         private StoredFile _selectedStoredFile;
 
         public StoredFile SelectedStoredFile
@@ -88,7 +84,8 @@ namespace FileStorageClient.UI.ViewModels
             _token = token;
             _fileService = new FilesService();
             _userService = new UserService();
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.AddProfile(new BusinessMapper());
             });
             _map = new Mapper(config);
