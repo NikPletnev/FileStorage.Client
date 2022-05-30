@@ -59,7 +59,8 @@ namespace FileStorage.Client.BLL.Service
             request.AddParameter(fileIdParam, fileId);
             request.AddHeader("Authorization", "Bearer " + token);
             var response = await GetResponseAsync<StoredFileModel>(request);
-            File.WriteAllBytes(path, response.Data.Data);
+            var data = Convert.FromBase64String(response.Data.Data);
+            File.WriteAllBytes(path, data);
         }
     }
 }
